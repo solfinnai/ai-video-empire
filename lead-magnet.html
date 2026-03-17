@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Business Starter Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: letter;
+            margin: 0.75in;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #0a0a0a;
+            background: white;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 2rem;
+        }
+        
+        .cover-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .cover-author {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .cover-value {
+            background: #fbbf24;
+            color: #0a0a0a;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
+        }
+        
+        .section {
+            padding: 2rem 0;
+        }
+        
+        .section-title {
+            color: #2563eb;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .prompt-box {
+            background: #f8fafc;
+            border: 2px solid #2563eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .prompt-title {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prompt-text {
+            font-family: 'Inter', monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 0.5rem;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            background: #2563eb;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-time {
+            background: #fbbf24;
+            color: #0a0a0a;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            float: right;
+        }
+        
+        .pricing-tier {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .pricing-tier.featured {
+            border-color: #2563eb;
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        }
+        
+        .tier-name {
+            color: #2563eb;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tier-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .tier-features {
+            list-style: none;
+        }
+        
+        .tier-features li {
+            padding: 0.25rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .tier-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .proposal-section {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .tools-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .tools-table th {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .tools-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .tools-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #0a0a0a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-weight: 500;
+        }
+        
+        .cta-section {
+            background: #2563eb;
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-button {
+            background: #fbbf24;
+            color: #0a0a0a;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #64748b;
+            border-top: 2px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <h1 class="cover-title">THE AI VIDEO<br>BUSINESS STARTER KIT</h1>
+        <p class="cover-subtitle">Everything You Need to Launch Your First AI-Powered Video Business</p>
+        <p class="cover-author">By Henry Finn | AI Video Empire</p>
+        <div class="cover-value">FREE GUIDE — Value: $500+</div>
+    </div>
+
+    <!-- Section 1: Client Outreach Prompts -->
+    <div class="page-break section">
+        <h2 class="section-title">10 AI Prompts for Client Outreach</h2>
+        <p>Copy-paste these proven templates to land your first AI video clients. Customize the [bracketed] sections for each prospect.</p>
+
+        <div class="prompt-box">
+            <div class="prompt-title">1. Cold DM to Local Restaurant</div>
+            <div class="prompt-text">Hi [Owner Name],
+
+Love what you're doing at [Restaurant Name] - saw the [specific dish/event] post and it looked incredible.
+
+Quick question: Are you using video content to showcase your food? I help local restaurants create mouth-watering videos that drive reservations.
+
+Just created a 60-second food video for [Similar Restaurant] that got 47K views and brought in $12K in bookings last month. The entire process takes 2 hours vs traditional filming that takes all day.
+
+Would you be open to seeing some examples? Could potentially create something similar for [Restaurant Name]'s signature dishes.
+
+Worth a 10-minute conversation?
+
+[Your Name]
+[Your Instagram/Portfolio Link]</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">2. Cold Email to Real Estate Agent</div>
+            <div class="prompt-text">Subject: Quick question about your property listings
+
+Hi [Agent Name],
+
+Congrats on the recent sale of [Specific Property Address] - saw it on your Instagram and the staging looked fantastic.
+
+I specialize in AI-enhanced property videos that sell homes 23% faster than traditional photography. My last client, [Agent Name], sold 3 properties within 48 hours of posting our videos.
+
+The difference? AI allows me to:
+→ Create "impossible" camera movements that showcase every angle
+→ Generate lifestyle scenes showing how families use the space  
+→ Add cinematic lighting that makes any property look premium
+
+Would you be interested in seeing examples of AI property videos that are closing deals faster? I'm booking March projects now and typically only work with 2-3 agents per area.
+
+Best regards,
+[Your Name]
+[Phone] | [Website]
+
+P.S. The process takes 3 hours vs traditional video teams that need full days and cost 3x more.</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">3. Cold DM to SaaS Company</div>
+            <div class="prompt-text">Hi [Name],
+
+Just checked out [Product Name] - the [specific feature] is exactly what teams like [Company Type] need right now.
+
+Question: How are you explaining [complex feature] to new users? I help SaaS companies create product demos that increase trial-to-paid conversions.
+
+Recent example: Built a 90-second AI product demo for [Similar SaaS] that increased their conversion rate by 156%. Users finally "got it" instead of churning on day 2.
+
+With AI, I can:
+→ Visualize abstract concepts that are hard to film
+→ Create multiple user scenarios in minutes, not weeks
+→ Show your UI in action with perfect user flows
+
+Interested in seeing how this could work for [Product Name]? I'm selective about SaaS partnerships but [Company] seems like a great fit for what we do.
+
+[Your Name] | AI Video Specialist
+[Portfolio Link]</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">4. LinkedIn Message to Marketing Director</div>
+            <div class="prompt-text">Hi [Name],
+
+Saw your recent post about Q4 content challenges - definitely resonates with what I'm hearing from marketing teams.
+
+I help companies like [Their Company] create video content 10x faster using AI. Instead of 6-week production cycles, we deliver in 6 days.
+
+Just wrapped a campaign for [Similar Company] - 12 product videos, 3 testimonials, and 20 social cuts. Traditional production quoted $47K and 8 weeks. We delivered everything for $12K in 2 weeks.
+
+The secret? AI handles the time-consuming parts (B-roll, animations, revisions) while humans focus on strategy and messaging.
+
+Would you be open to a 15-minute call about how this could work for [Their Company]'s content goals? Happy to share the case study and show you the behind-the-scenes process.
+
+Best,
+[Your Name]
+[Title] | [Company]</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">5. Follow-up Message After No Response</div>
+            <div class="prompt-text">Hi [Name],
+
+Following up on my message about AI video production for [Company/Project].
+
+I get it - you probably get 100 pitches a week. This isn't another pitch.
+
+Instead, I'd like to create a sample 30-second video for [Specific Product/Service] at no cost. No strings attached. If you love it, we can discuss working together. If not, you keep the video and we part as friends.
+
+This sample would show you:
+→ How AI can visualize [Their Product] in action
+→ The quality level we deliver  
+→ Why our process is different from traditional agencies
+
+Sound fair? I can have something ready by [Specific Day].
+
+Just reply "YES" if you're curious to see what AI can do for [Company].
+
+[Your Name]
+
+P.S. This offer expires [Date] - I can only create so many samples per month.</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">6. Referral Request to Existing Client</div>
+            <div class="prompt-text">Hi [Client Name],
+
+Hope the [Project Name] video is driving the results we discussed! Love seeing the engagement on your social posts.
+
+Quick favor: Do you know any [Industry] companies that might benefit from AI video content like we created for you?
+
+I'm booking projects for [Month] and thought I'd check if anyone in your network could use:
+→ Product demos that convert browsers to buyers
+→ Social content that actually drives sales
+→ Professional videos without the traditional timeline/budget
+
+If someone comes to mind, I'd love a warm introduction. Happy to offer them the same VIP pricing tier we gave you as a thank-you for the referral.
+
+Thanks for being such an amazing client!
+
+[Your Name]
+
+P.S. For every referral that becomes a client, I'll credit $500 toward your next video project.</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">7. Portfolio Review Invitation</div>
+            <div class="prompt-text">Subject: Would love your feedback on my latest work
+
+Hi [Name],
+
+I've been following [Their Company] and really admire your approach to [Specific Thing They Do Well].
+
+I'm putting together a new portfolio of AI video work and would value your perspective. As someone with deep experience in [Their Industry], your feedback would be incredibly valuable.
+
+The portfolio showcases:
+→ AI product demonstrations
+→ Brand storytelling with generated visuals  
+→ Social content optimized for each platform
+
+Would you be open to a 10-minute screen share? I'd love to get your thoughts on the creative direction and technical execution.
+
+In exchange, I'd be happy to create a sample video concept for [Their Company] showing how these techniques could work in your industry.
+
+Available this week for a quick call?
+
+Best,
+[Your Name]
+[Portfolio Link]</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">8. Event/Wedding Videography Pitch</div>
+            <div class="prompt-text">Hi [Couple Names],
+
+Congratulations on your engagement! [Specific detail about their announcement/venue/date]
+
+I create cinematic wedding films using cutting-edge AI technology that captures moments traditional videography might miss. Think Netflix documentary meets fairy tale romance.
+
+What makes our approach different:
+→ AI generates stunning aerial shots without expensive drone permits
+→ Create magical "impossible" camera movements  
+→ Enhance lighting to make every moment look movie-perfect
+→ Generate alternative weather scenarios (outdoor backup plans)
+
+Recent couple said: "Our wedding video looks like a Hollywood movie. Friends keep asking who our director was."
+
+I only book [Number] weddings per year to ensure each couple gets my full attention. Your [Date] date is still available, but I typically book 4-6 months in advance.
+
+Would you like to see examples of our cinematic wedding films? I'd love to create something extraordinary for your special day.
+
+Warmly,
+[Your Name]
+[Phone] | [Portfolio]</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">9. E-commerce Product Video Pitch</div>
+            <div class="prompt-text">Hi [Brand Name] team,
+
+Love your [Specific Product] - the [Specific Feature] is genius. Been following your growth since [Specific Milestone].
+
+Question: Are you using video to showcase your products on product pages? I help e-commerce brands increase conversions with AI-enhanced product videos.
+
+Recent results:
+→ [Brand]: 34% increase in add-to-cart rate
+→ [Brand]: 67% increase in time-on-page
+→ [Brand]: 23% reduction in return rate
+
+With AI, we can:
+→ Show your product in 20+ lifestyle settings
+→ Demonstrate features that are hard to photograph
+→ Create seasonal variations without new photoshoots
+→ Generate user-generated content style videos
+
+Your [Product] would be perfect for this approach - especially showcasing [Specific Feature That's Hard to Show in Photos].
+
+Interested in seeing examples? I can create a sample product video for [Specific Product] to show you the possibilities.
+
+Best,
+[Your Name]
+E-commerce Video Specialist</div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-title">10. Retainer Proposal Message</div>
+            <div class="prompt-text">Hi [Client Name],
+
+The [Recent Project] results have been incredible - 47% increase in engagement and $23K in direct sales attribution. You're clearly seeing the ROI of consistent AI video content.
+
+I've been thinking about our partnership and have a proposal that could be mutually beneficial.
+
+Instead of project-by-project work, what if we structured a monthly retainer? This would give you:
+
+→ Priority booking (no waiting for my schedule)
+→ 25% cost savings vs project rates  
+→ Monthly content planning session included
+→ Faster turnaround times (dedicated capacity)
+→ First access to new AI tools and techniques
+
+Suggested structure:
+→ 4 videos per month (mix of product, social, ads)
+→ Monthly strategy session  
+→ Unlimited revisions within scope
+→ $4,500/month (vs $6,500 project rate equivalent)
+
+This ensures consistent content for your brand while giving me predictable revenue to invest in better tools and faster delivery.
+
+Interested in exploring this for Q2? Happy to adjust the scope based on your priorities.
+
+[Your Name]</div>
+        </div>
+    </div>
+
+    <!-- Section 2: AI Video Production Workflow -->
+    <div class="page-break section">
+        <h2 class="section-title">The AI Video Production Workflow Cheat Sheet</h2>
+        <p>The complete pipeline from idea to delivery - optimized for speed and quality.</p>
+
+        <div class="workflow-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <div class="step-title">Idea Generation & Client Brief Analysis</div>
+                <p>Extract key requirements, target audience, and success metrics from client materials.</p>
+                <div class="step-time">15 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <div class="step-title">Script Generation (Claude/ChatGPT)</div>
+                <p>AI generates multiple script variations, hooks, and CTAs based on audience and objectives.</p>
+                <div class="step-time">20 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <div class="step-title">Storyboard Creation (Midjourney)</div>
+                <p>Generate visual references and shot compositions for each scene in the script.</p>
+                <div class="step-time">30 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <div class="step-title">Live Action Filming</div>
+                <p>Record presenter segments, product shots, and any required live footage with proper lighting.</p>
+                <div class="step-time">45 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <div class="step-title">AI B-Roll Generation (Runway)</div>
+                <p>Create custom B-roll footage, impossible shots, and visual effects that enhance the story.</p>
+                <div class="step-time">25 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+                <div class="step-title">Video Editing (CapCut/Premiere + AI)</div>
+                <p>Assemble footage, add transitions, apply AI-generated effects and automated corrections.</p>
+                <div class="step-time">60 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">7</div>
+            <div class="step-content">
+                <div class="step-title">AI Color Grading</div>
+                <p>Apply consistent color palette and mood enhancement using AI-powered grading tools.</p>
+                <div class="step-time">15 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">8</div>
+            <div class="step-content">
+                <div class="step-title">Audio Production (ElevenLabs + Suno)</div>
+                <p>Generate voiceovers, background music, and sound effects tailored to brand and mood.</p>
+                <div class="step-time">20 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">9</div>
+            <div class="step-content">
+                <div class="step-title">Client Delivery & Review</div>
+                <p>Upload to client portal with organized feedback system and revision tracking.</p>
+                <div class="step-time">10 min</div>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <div class="step-number">10</div>
+            <div class="step-content">
+                <div class="step-title">Repurposing (Opus Clip)</div>
+                <p>Generate multiple social media formats and platform-optimized versions automatically.</p>
+                <div class="step-time">15 min</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <strong>Total Production Time: 4 hours, 15 minutes</strong><br>
+            Traditional production: 2-3 weeks | AI-enhanced production: Same day delivery possible
+        </div>
+    </div>
+
+    <!-- Section 3: Video Service Pricing Guide -->
+    <div class="page-break section">
+        <h2 class="section-title">Video Service Pricing Guide</h2>
+        <p>Three proven pricing tiers that justify premium rates through AI-enhanced value delivery.</p>
+
+        <div class="pricing-tier">
+            <div class="tier-name">Starter Package</div>
+            <div class="tier-price">$1,500 - $2,500</div>
+            <ul class="tier-features">
+                <li>1 video (up to 90 seconds)</li>
+                <li>AI script development</li>
+                <li>Basic AI B-roll integration</li>
+                <li>Standard editing and color correction</li>
+                <li>2 rounds of revisions</li>
+                <li>Delivery in 5-7 business days</li>
+                <li>1 optimized format (square, vertical, or horizontal)</li>
+            </ul>
+            <p><strong>Perfect for:</strong> Small businesses, social media content, product announcements</p>
+        </div>
+
+        <div class="pricing-tier featured">
+            <div class="tier-name">Pro Package</div>
+            <div class="tier-price">$3,000 - $5,000</div>
+            <ul class="tier-features">
+                <li>3 videos (up to 2 minutes each)</li>
+                <li>Advanced AI script optimization</li>
+                <li>Custom AI-generated B-roll and effects</li>
+                <li>Professional editing with advanced AI tools</li>
+                <li>Social media cut-downs (6-10 additional pieces)</li>
+                <li>3 rounds of revisions</li>
+                <li>Priority 3-5 day delivery</li>
+                <li>Multi-platform optimization</li>
+                <li>Basic usage rights and licensing</li>
+            </ul>
+            <p><strong>Perfect for:</strong> Marketing campaigns, product launches, brand storytelling</p>
+        </div>
+
+        <div class="pricing-tier">
+            <div class="tier-name">Premium Package</div>
+            <div class="tier-price">$7,500 - $15,000+</div>
+            <ul class="tier-features">
+                <li>5+ videos (comprehensive campaign)</li>
+                <li>AI-powered market research and strategy</li>
+                <li>Custom AI avatar creation (if applicable)</li>
+                <li>Advanced visual effects and animations</li>
+                <li>Complete social media content suite (20+ pieces)</li>
+                <li>Unlimited revisions within scope</li>
+                <li>Express 48-72 hour delivery</li>
+                <li>Full commercial usage rights</li>
+                <li>Monthly retainer options available</li>
+                <li>Dedicated project manager</li>
+            </ul>
+            <p><strong>Perfect for:</strong> Large campaigns, enterprise clients, ongoing partnerships</p>
+        </div>
+
+        <h3 class="section-subtitle">How to Justify Premium Pricing</h3>
+        
+        <div class="highlight-box">
+            <strong>Speed Premium:</strong> "We deliver in days what traditional agencies take weeks to complete. Your time-to-market advantage is worth the investment."
+        </div>
+
+        <div class="highlight-box">
+            <strong>Technology Edge:</strong> "Our AI-enhanced workflow creates visual effects and scenarios that would cost $10K+ with traditional VFX teams."
+        </div>
+
+        <div class="highlight-box">
+            <strong>Result Focus:</strong> "We don't charge for hours—we charge for outcomes. Our videos consistently outperform industry benchmarks."
+        </div>
+
+        <div class="highlight-box">
+            <strong>Iteration Advantage:</strong> "With AI, we can test multiple creative directions quickly, ensuring your final video is optimized for performance."
+        </div>
+    </div>
+
+    <!-- Section 4: Sample $5,000 Video Proposal -->
+    <div class="page-break section">
+        <h2 class="section-title">Sample $5,000 Video Proposal Template</h2>
+        <p>Copy this proven proposal structure to win high-value clients consistently.</p>
+
+        <div class="proposal-section">
+            <h3>Project Overview</h3>
+            <p><strong>[Client Name]</strong> is launching <strong>[Product/Service]</strong> and needs compelling video content that drives <strong>[Specific Goal: awareness/sales/signups]</strong>. This proposal outlines our AI-enhanced video production approach to deliver exceptional results within <strong>[Timeline]</strong>.</p>
+        </div>
+
+        <div class="proposal-section">
+            <h3>Scope of Work</h3>
+            <p><strong>Primary Deliverable:</strong></p>
+            <ul>
+                <li>One (1) 90-120 second promotional video optimized for [Primary Platform]</li>
+                <li>AI-enhanced script development targeting [Target Audience]</li>
+                <li>Professional filming and AI-generated B-roll integration</li>
+                <li>Advanced editing with custom animations and effects</li>
+            </ul>
+
+            <p><strong>Additional Deliverables:</strong></p>
+            <ul>
+                <li>6 social media cut-downs (15-60 seconds each)</li>
+                <li>Multiple aspect ratios (16:9, 9:16, 1:1)</li>
+                <li>Thumbnail/cover image variations</li>
+                <li>Closed captions and subtitle files</li>
+            </ul>
+        </div>
+
+        <div class="proposal-section">
+            <h3>Our AI-Enhanced Process</h3>
+            <p><strong>Week 1:</strong> Strategy, scripting, and AI storyboard development</p>
+            <p><strong>Week 2:</strong> Filming, AI B-roll generation, and initial edit</p>
+            <p><strong>Week 3:</strong> Refinements, AI-enhanced effects, and final delivery</p>
+
+            <p><strong>Why AI Enhancement Matters:</strong></p>
+            <ul>
+                <li>Faster iteration cycles for optimal messaging</li>
+                <li>Custom visual effects at fraction of traditional cost</li>
+                <li>Data-driven creative decisions based on performance predictions</li>
+                <li>Ability to generate multiple creative variations quickly</li>
+            </ul>
+        </div>
+
+        <div class="proposal-section">
+            <h3>Timeline</h3>
+            <p><strong>Kickoff:</strong> [Date]</p>
+            <p><strong>Script Approval:</strong> [Date + 3 days]</p>
+            <p><strong>Production Day:</strong> [Date + 7 days]</p>
+            <p><strong>First Cut Review:</strong> [Date + 12 days]</p>
+            <p><strong>Final Delivery:</strong> [Date + 18 days]</p>
+
+            <p><em>Express delivery available for additional $1,000 (10-day total timeline)</em></p>
+        </div>
+
+        <div class="proposal-section">
+            <h3>Investment</h3>
+            <p><strong>Total Project Investment: $5,000</strong></p>
+            
+            <p><strong>Payment Structure:</strong></p>
+            <ul>
+                <li>50% due upon project kickoff ($2,500)</li>
+                <li>50% due upon final delivery ($2,500)</li>
+            </ul>
+
+            <p><strong>What's Included in This Investment:</strong></p>
+            <ul>
+                <li>Full AI-enhanced video production</li>
+                <li>All deliverables listed above</li>
+                <li>Two rounds of revisions</li>
+                <li>30-day post-delivery support</li>
+                <li>Commercial usage rights</li>
+            </ul>
+        </div>
+
+        <div class="proposal-section">
+            <h3>Terms & Conditions</h3>
+            <ul>
+                <li>Project timeline begins upon receipt of signed proposal and initial payment</li>
+                <li>Client provides all necessary assets (logos, product shots, brand guidelines) within 2 business days</li>
+                <li>Additional revisions beyond scope available at $200/hour</li>
+                <li>Final files delivered via secure cloud link with 90-day access</li>
+                <li>Rush delivery (under 10 days) incurs 20% premium</li>
+            </ul>
+        </div>
+
+        <div class="proposal-section">
+            <h3>About [Your Company Name]</h3>
+            <p>We specialize in AI-enhanced video production that delivers results faster and more cost-effectively than traditional methods. Our unique approach combines human creativity with artificial intelligence to create content that drives measurable business outcomes.</p>
+
+            <p><strong>Recent Results:</strong></p>
+            <ul>
+                <li>[Client Name]: 340% increase in conversion rate</li>
+                <li>[Client Name]: 2.3M views and $1.2M in sales attribution</li>
+                <li>[Client Name]: 67% reduction in cost-per-acquisition</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <div class="cta-title">Ready to Get Started?</div>
+            <p>Reply to this proposal with "APPROVED" and we'll send the contract and kickoff materials immediately.</p>
+            <p>Questions? Let's schedule a 15-minute call to discuss details.</p>
+        </div>
+    </div>
+
+    <!-- Section 5: Top 20 AI Tools for Video Pros -->
+    <div class="page-break section">
+        <h2 class="section-title">Top 20 AI Tools for Video Professionals</h2>
+        <p>The essential toolkit for AI-enhanced video production in 2026.</p>
+
+        <table class="tools-table">
+            <thead>
+                <tr>
+                    <th>Tool</th>
+                    <th>What It Does</th>
+                    <th>Price</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Runway ML</strong></td>
+                    <td>AI video generation, motion graphics, VFX</td>
+                    <td>$15-50/mo</td>
+                    <td>B-roll generation, impossible shots</td>
+                </tr>
+                <tr>
+                    <td><strong>OpenAI Sora</strong></td>
+                    <td>Text-to-video generation, realistic scenes</td>
+                    <td>$20/mo</td>
+                    <td>Cinematic sequences, concept videos</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Veo 3</strong></td>
+                    <td>High-quality video synthesis</td>
+                    <td>Usage-based</td>
+                    <td>Professional commercials, brand content</td>
+                </tr>
+                <tr>
+                    <td><strong>Kling AI</strong></td>
+                    <td>Video generation with physics simulation</td>
+                    <td>$10-30/mo</td>
+                    <td>Product demonstrations, physics-based shots</td>
+                </tr>
+                <tr>
+                    <td><strong>HeyGen</strong></td>
+                    <td>AI avatar creation and spokesperson videos</td>
+                    <td>$24-150/mo</td>
+                    <td>Talking head videos, presentations</td>
+                </tr>
+                <tr>
+                    <td><strong>ElevenLabs</strong></td>
+                    <td>AI voice generation and cloning</td>
+                    <td>$5-99/mo</td>
+                    <td>Voiceovers, multilingual content</td>
+                </tr>
+                <tr>
+                    <td><strong>Suno</strong></td>
+                    <td>AI music and sound effect generation</td>
+                    <td>$8-24/mo</td>
+                    <td>Custom soundtracks, background music</td>
+                </tr>
+                <tr>
+                    <td><strong>CapCut Pro</strong></td>
+                    <td>AI-powered video editing</td>
+                    <td>$7.99/mo</td>
+                    <td>Quick edits, AI captions, effects</td>
+                </tr>
+                <tr>
+                    <td><strong>Descript</strong></td>
+                    <td>AI video editing, transcription, voice cloning</td>
+                    <td>$12-40/mo</td>
+                    <td>Content editing, podcast production</td>
+                </tr>
+                <tr>
+                    <td><strong>Midjourney</strong></td>
+                    <td>AI image generation for storyboards</td>
+                    <td>$10-120/mo</td>
+                    <td>Concept art, storyboarding, thumbnails</td>
+                </tr>
+                <tr>
+                    <td><strong>Claude (Anthropic)</strong></td>
+                    <td>AI writing for scripts and strategy</td>
+                    <td>$20/mo</td>
+                    <td>Script writing, content strategy</td>
+                </tr>
+                <tr>
+                    <td><strong>Opus Clip</strong></td>
+                    <td>Long-form to short-form video conversion</td>
+                    <td>$9-99/mo</td>
+                    <td>Social media repurposing, highlights</td>
+                </tr>
+                <tr>
+                    <td><strong>Synthesia</strong></td>
+                    <td>AI presenter videos</td>
+                    <td>$22-90/mo</td>
+                    <td>Training videos, corporate content</td>
+                </tr>
+                <tr>
+                    <td><strong>Pika Labs</strong></td>
+                    <td>AI video effects and animations</td>
+                    <td>$8-70/mo</td>
+                    <td>Motion graphics, style transfer</td>
+                </tr>
+                <tr>
+                    <td><strong>Topaz Video AI</strong></td>
+                    <td>Video upscaling and enhancement</td>
+                    <td>$199 one-time</td>
+                    <td>Quality improvement, resolution upscaling</td>
+                </tr>
+                <tr>
+                    <td><strong>Frame.io</strong></td>
+                    <td>AI-powered collaboration and review</td>
+                    <td>$15-50/mo</td>
+                    <td>Client reviews, team collaboration</td>
+                </tr>
+                <tr>
+                    <td><strong>Cleanvoice</strong></td>
+                    <td>AI audio cleaning and enhancement</td>
+                    <td>$10-50/mo</td>
+                    <td>Podcast editing, audio cleanup</td>
+                </tr>
+                <tr>
+                    <td><strong>Pictory</strong></td>
+                    <td>Text-to-video with stock footage</td>
+                    <td>$19-99/mo</td>
+                    <td>Explainer videos, social content</td>
+                </tr>
+                <tr>
+                    <td><strong>InVideo</strong></td>
+                    <td>Template-based AI video creation</td>
+                    <td>$15-60/mo</td>
+                    <td>Marketing videos, social content</td>
+                </tr>
+                <tr>
+                    <td><strong>Fliki</strong></td>
+                    <td>Text-to-video with AI voices</td>
+                    <td>$14-66/mo</td>
+                    <td>Educational content, quick videos</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <strong>Pro Tip:</strong> Start with Runway ML, CapCut Pro, and Claude for maximum impact at minimum cost. Add tools as your revenue grows and specific needs arise.
+        </div>
+
+        <h3 class="section-subtitle">Essential Tool Combinations</h3>
+        
+        <p><strong>Starter Stack ($50/month):</strong> Claude + CapCut Pro + Runway ML + Opus Clip</p>
+        <p><strong>Pro Stack ($150/month):</strong> Add Midjourney + ElevenLabs + Descript + HeyGen</p>
+        <p><strong>Agency Stack ($300/month):</strong> Add Sora + Frame.io + Topaz + Synthesia</p>
+    </div>
+
+    <!-- Back Page / CTA -->
+    <div class="page-break section">
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Build Your AI Video Empire?</h2>
+            <p>This starter kit gave you the foundation, but there's so much more to learn.</p>
+            
+            <p>In my complete AI Video Empire course, you'll discover:</p>
+            <ul style="text-align: left; margin: 2rem 0;">
+                <li>Advanced AI workflows that create Hollywood-quality videos</li>
+                <li>Client acquisition systems that fill your pipeline with $5K+ projects</li>
+                <li>Pricing psychology that justifies premium rates</li>
+                <li>Scaling strategies to build a 7-figure video agency</li>
+                <li>Exclusive AI tools and techniques not available anywhere else</li>
+            </ul>
+
+            <a href="[YOUR-COURSE-URL]" class="cta-button">JOIN AI VIDEO EMPIRE NOW</a>
+            
+            <p style="margin-top: 2rem;">Join 200+ creators building profitable video businesses with AI</p>
+            
+            <div style="border-top: 2px solid rgba(255,255,255,0.3); margin: 2rem 0; padding-top: 2rem;">
+                <p><strong>Questions?</strong> Email me directly: henry@aidetailing.com</p>
+                <p>Follow the journey: @henryfinn on all platforms</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 AI Video Empire | Created by Henry Finn</p>
+            <p>This guide contains proprietary methods and strategies. Please do not redistribute without permission.</p>
+        </div>
+    </div>
+</body>
+</html>

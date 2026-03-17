@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Empire | Launch a $10K/Month Video Business Using AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --electric-blue: #2563eb;
+            --deep-black: #0a0a0a;
+            --accent-yellow: #fbbf24;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--electric-blue);
+        }
+
+        .header-cta {
+            background: linear-gradient(135deg, var(--accent-yellow), #fcd34d);
+            color: var(--deep-black);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.8)), url('images/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), transparent);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero .subheadline {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--gray-200);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-proof {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-proof span {
+            color: var(--electric-blue);
+            font-weight: 600;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-yellow), #fcd34d);
+            color: var(--deep-black);
+            padding: 20px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #fcd34d, var(--accent-yellow));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cta-primary:hover::before {
+            opacity: 1;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.4);
+        }
+
+        .cta-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .payment-options {
+            display: block;
+            margin-top: 16px;
+            color: var(--gray-200);
+            font-size: 16px;
+        }
+
+        .guarantee {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--gray-200);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        /* Problem Section */
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, var(--gray-900), var(--gray-800));
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            text-align: center;
+        }
+
+        .problem-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--electric-blue);
+        }
+
+        /* Positioning Section */
+        .positioning {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('images/ai-tech.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--gray-900);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: var(--gray-800);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        .highlight-column {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1));
+            border-left: 3px solid var(--electric-blue);
+            border-right: 3px solid var(--electric-blue);
+        }
+
+        .checkmark {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ef4444;
+        }
+
+        /* Curriculum Section */
+        .curriculum {
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('images/editing.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .module-card {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.95));
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--electric-blue);
+        }
+
+        .module-number {
+            background: var(--electric-blue);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .module-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--electric-blue);
+        }
+
+        /* Value Stack Section */
+        .value-stack {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('images/community.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .value-items {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .value-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .value-item:last-child {
+            border-bottom: none;
+        }
+
+        .value-description {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .value-price {
+            color: var(--electric-blue);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .total-value {
+            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .total-value h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .crossed-price {
+            text-decoration: line-through;
+            color: var(--gray-200);
+            font-size: 24px;
+        }
+
+        .final-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-yellow);
+        }
+
+        /* FAQ Section */
+        .faq-items {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--gray-900);
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .faq-answer {
+            padding: 0 25px 25px;
+            color: var(--gray-200);
+            line-height: 1.7;
+        }
+
+        /* Income Potential */
+        .income-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .income-card {
+            background: linear-gradient(135deg, var(--electric-blue), #3b82f6);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            transform: scale(1);
+            transition: transform 0.3s;
+        }
+
+        .income-card:hover {
+            transform: scale(1.05);
+        }
+
+        .income-amount {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            margin-bottom: 10px;
+        }
+
+        .income-description {
+            font-size: 14px;
+            color: var(--white);
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('images/creator.jpg');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            color: var(--accent-yellow);
+        }
+
+        .final-cta .subtext {
+            font-size: 20px;
+            color: var(--gray-200);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray-200);
+            font-size: 14px;
+        }
+
+        .trust-badge::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: var(--gray-200);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--electric-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .social-proof {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .problem-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .income-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Pulse animation for CTA buttons */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(251, 191, 36, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+            }
+        }
+
+        .cta-primary:hover {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">AI Video Empire</div>
+            <a href="#final-cta" class="header-cta">Get Access Now</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Launch a $10K/Month Video Business Using AI — Even If You've Never Had a Single Client</h1>
+                <p class="subheadline">The first program that combines cutting-edge AI video production with a proven client acquisition system. Go from zero to profitable in 30 days.</p>
+                
+                <div class="social-proof">
+                    <div><span>200+</span> creators</div>
+                    <div><span>$2M+</span> in client revenue generated</div>
+                </div>
+                
+                <a href="#final-cta" class="cta-primary">
+                    <span>Get Instant Access — $497</span>
+                </a>
+                <div class="payment-options">or 3 payments of $179</div>
+                <div class="guarantee">30-Day Money-Back Guarantee</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section" id="problem">
+        <div class="container">
+            <h2>You Know Video Is Booming. But You're Stuck.</h2>
+            <div class="problem-cards">
+                <div class="problem-card">
+                    <h3>Traditional Film Courses</h3>
+                    <p>Cost $997+ and don't mention AI. They're teaching yesterday's methods for tomorrow's market.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>AI Courses</h3>
+                    <p>Teach tools but not how to make money. You'll know 50 prompts but have zero clients.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>The Missing Link</h3>
+                    <p>You need BOTH — cutting-edge AI production AND proven business systems. Nobody's teaching it. Until now.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Positioning Section -->
+    <section class="section positioning" id="positioning">
+        <div class="container">
+            <h2>The Gap Nobody Else Is Filling</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="highlight-column">AI Video Empire</th>
+                            <th>Full Time Filmmaker</th>
+                            <th>Curious Refuge</th>
+                            <th>Studio Sherpas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AI Video Workflows</td>
+                            <td class="highlight-column checkmark">✅</td>
+                            <td class="cross">❌</td>
+                            <td class="checkmark">✅</td>
+                            <td class="cross">❌</td>
+                        </tr>
+                        <tr>
+                            <td>Business Building</td>
+                            <td class="highlight-column checkmark">✅</td>
+                            <td>Basic</td>
+                            <td class="cross">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td>Client Acquisition</td>
+                            <td class="highlight-column checkmark">✅</td>
+                            <td>Basic</td>
+                            <td class="cross">❌</td>
+                            <td class="checkmark">✅</td>
+                        </tr>
+                        <tr>
+                            <td>Paid Community</td>
+                            <td class="highlight-column checkmark">✅</td>
+                            <td>FB Group</td>
+                            <td>Discord</td>
+                            <td class="cross">❌</td>
+                        </tr>
+                        <tr>
+                            <td>AI Automation Training</td>
+                            <td class="highlight-column checkmark">✅</td>
+                            <td class="cross">❌</td>
+                            <td class="cross">❌</td>
+                            <td class="cross">❌</td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td class="highlight-column">$497</td>
+                            <td>$997</td>
+                            <td>$300</td>
+                            <td>~$500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section class="section curriculum" id="curriculum">
+        <div class="container">
+            <h2>8 Modules. 30 Days. Your AI Video Business.</h2>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-number">1</div>
+                    <h3>The AI Video Landscape</h3>
+                    <p>Master the tools that matter: Runway, Sora, Veo 3, Kling, HeyGen, ElevenLabs. We cut through the noise and show you exactly which AI tools to use when.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">2</div>
+                    <h3>Your AI Production Pipeline</h3>
+                    <p>The complete script-to-screen workflow. From ideation to final render, you'll have a repeatable system that works every time.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">3</div>
+                    <h3>Hybrid Filmmaking</h3>
+                    <p>AI + Real Camera = The Sweet Spot. Learn to blend AI-generated content with traditional filming for results that wow clients and justify premium pricing.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">4</div>
+                    <h3>Packaging Your Offer</h3>
+                    <p>Find your niche, structure your tiers ($2K-$10K), and write proposals that close. Stop competing on price and start selling transformation.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">5</div>
+                    <h3>Client Acquisition Machine</h3>
+                    <p>Cold outreach that converts, ads that scale, and referral systems that run on autopilot. Never worry about your next client again.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">6</div>
+                    <h3>AI-Automated Business Operations</h3>
+                    <p>Work 20 hours per week, not 60. Use AI to automate client communication, project management, and delivery. Scale without burning out.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">7</div>
+                    <h3>Scaling with Content & Personal Brand</h3>
+                    <p>Turn your work into viral content. Build a personal brand that attracts clients instead of chasing them. The viral content engine framework.</p>
+                </div>
+                <div class="module-card">
+                    <div class="module-number">8</div>
+                    <h3>Scaling to $20K+/Month</h3>
+                    <p>Hiring, retainers, and the agency model. Go from solopreneur to CEO. Build a business that works without you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Stack Section -->
+    <section class="section value-stack" id="value">
+        <div class="container">
+            <h2>Everything You Get</h2>
+            <div class="value-items">
+                <div class="value-item">
+                    <div class="value-description">8-module video course (30+ hours)</div>
+                    <div class="value-price">$2,000</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-description">AI workflow templates and prompts</div>
+                    <div class="value-price">$500</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-description">Client acquisition playbook with scripts</div>
+                    <div class="value-price">$500</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-description">Access to private Whop community</div>
+                    <div class="value-price">$97/mo</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-description">Weekly live Q&A calls</div>
+                    <div class="value-price">$200/mo</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-description">Monthly AI tool updates</div>
+                    <div class="value-price">Priceless</div>
+                </div>
+                <div class="value-item">
+                    <div class="value-description">30-day money-back guarantee</div>
+                    <div class="value-price">Peace of Mind</div>
+                </div>
+            </div>
+            
+            <div class="total-value">
+                <h3>Total Value: <span class="crossed-price">$3,200+</span></h3>
+                <div class="final-price">Your Price: $497</div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#final-cta" class="cta-primary">
+                    <span>Join AI Video Empire Now</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" id="faq">
+        <div class="container">
+            <h2>But What If...</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        "I'm not technical"
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Neither were 70% of our students. The AI does the heavy lifting — you just need to follow the prompts and workflows we provide. If you can use a smartphone, you can do this.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        "I don't have gear"
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Module 1 covers starting with just a phone + AI. You don't need expensive cameras or editing software. We show you how to create professional results with minimal gear.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        "I can learn this on YouTube"
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        You can. In 2 years. YouTube teaches random tips, not complete systems. Our program gives you the exact roadmap, templates, and community support to get profitable in 30 days.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        "Is this too saturated?"
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        93% of marketers say video delivers ROI. Demand is exploding faster than supply. Most "video creators" still don't know AI — giving you a massive competitive advantage.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        "What if it doesn't work?"
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        30-day money-back guarantee. Zero risk. If you complete the modules and don't see a clear path to $10K/month, we'll refund every penny.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Income Potential Section -->
+    <section class="section" id="income">
+        <div class="container">
+            <h2>The Math Is Simple</h2>
+            <div class="income-cards">
+                <div class="income-card">
+                    <div class="income-amount">$9,000</div>
+                    <div class="income-description">3 clients × $3,000/month</div>
+                </div>
+                <div class="income-card">
+                    <div class="income-amount">$25,000</div>
+                    <div class="income-description">5 clients × $5,000/project</div>
+                </div>
+                <div class="income-card">
+                    <div class="income-amount">$16,000</div>
+                    <div class="income-description">8 retainer clients × $2,000/month</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section final-cta" id="final-cta">
+        <div class="container">
+            <h2>Your Competitors Are Already Using AI. Are You?</h2>
+            <p class="subtext">Every week you wait, someone else is landing the clients that should be yours.</p>
+            
+            <a href="#" class="cta-primary">
+                <span>Join AI Video Empire — $497</span>
+            </a>
+            <div class="payment-options">or 3 payments of $179</div>
+            
+            <div class="trust-badges">
+                <div class="trust-badge">30-day guarantee</div>
+                <div class="trust-badge">Instant access</div>
+                <div class="trust-badge">Lifetime updates</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>AI Video Empire by 0N1 Corp</div>
+                <div class="footer-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div>Built with AI. Obviously.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animations
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const answer = faqItem.querySelector('.faq-answer');
+                const isOpen = answer.style.display === 'block';
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.style.display = 'none';
+                });
+                document.querySelectorAll('.faq-question span').forEach(span => {
+                    span.textContent = '+';
+                });
+                
+                // Toggle current item
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    question.querySelector('span').textContent = '−';
+                }
+            });
+        });
+
+        // Add parallax effect to hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const rate = scrolled * -0.5;
+                hero.style.transform = `translate3d(0, ${rate}px, 0)`;
+            }
+        });
+
+        // Add glow effect to CTA buttons on scroll
+        window.addEventListener('scroll', () => {
+            const ctaButtons = document.querySelectorAll('.cta-primary');
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            ctaButtons.forEach(button => {
+                const buttonPosition = button.getBoundingClientRect().top + scrollPosition;
+                const distanceFromCenter = Math.abs(scrollPosition + windowHeight/2 - buttonPosition);
+                const maxDistance = windowHeight;
+                const intensity = Math.max(0, 1 - distanceFromCenter / maxDistance);
+                
+                if (intensity > 0.3) {
+                    button.style.boxShadow = `0 0 ${20 + intensity * 30}px rgba(251, 191, 36, ${intensity * 0.6})`;
+                }
+            });
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add initial fade-in for hero content
+            setTimeout(() => {
+                document.querySelector('.hero-content').classList.add('animate-fade-in-up');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
